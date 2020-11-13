@@ -65,4 +65,9 @@ abstract class Filter
     {
         return new PrefixFilter();
     }
+
+    public static function fuzzy()
+    {
+        return new FuzzyFilter();
+    }
 }

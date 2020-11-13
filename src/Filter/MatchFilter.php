@@ -8,6 +8,7 @@ class MatchFilter extends Filter
 {
     protected $field;
     protected $query;
+    protected $operator;
     protected $analyzer;
 
     public function setField(string $field)
@@ -24,7 +25,14 @@ class MatchFilter extends Filter
         return $this;
     }
 
-    public function setAnalyzer($analyzer)
+    public function setOperator(string $operator)
+    {
+        $this->operator = $operator;
+
+        return $this;
+    }
+
+    public function setAnalyzer(string $analyzer)
     {
         $this->analyzer = $analyzer;
 
@@ -44,6 +52,10 @@ class MatchFilter extends Filter
                 ],
             ],
         ];
+
+        if (null !== $this->operator) {
+            $query['match'][$this->field]['operator'] = $this->operator;
+        }
 
         if (null !== $this->analyzer) {
             $query['match'][$this->field]['analyzer'] = $this->analyzer;
